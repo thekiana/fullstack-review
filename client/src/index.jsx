@@ -1,8 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import axios from 'axios';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+
+// 1. user types Github username
+//on Submit send Post request to server
+//server GET that user's repos from GitHub API
+//Server save repos to database
+
+// 2. user visits / refreshes page
+// GET top 25 repos in server's database
+// take repos and render display on page
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +24,14 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+
+    axios({
+      method: 'post',
+      url: '/repos',
+      data: {
+        name: term
+      }
+    });
   }
 
   render () {
